@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, url_for, redirect
 from typing import Optional
 
 app: Flask = Flask(__name__)  # Crea el objeto Flask
