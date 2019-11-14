@@ -9,4 +9,6 @@ def home() -> str:  # Crea la función a correr en la ruta
 
 
 # Correr la app para iniciar el server
-app.run(host='localhost', port=8080, debug=True,)
+if __name__ == '__main__':
+    app.run(host='localhost', port=8080, debug=True,)
+# debug mantiene el servidor vivo para que recargue la app
