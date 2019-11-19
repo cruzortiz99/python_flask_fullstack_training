@@ -1,0 +1,21 @@
+<!-- Herencia de template -->
+{% extends 'bases/base-template.html' %}
+{% block content %}
+<h1>Bienvenido</h1>
+<!-- Usando variables inyectadas con flask -->
+<h2>Hola, {{ name }} {{last_name}}</h2>
+<!-- Usando if en el template -->
+{% if age > 18 %}
+<h2>Es mayor de edad</h2>
+{%  endif %}
+<ul>
+  <!-- Usando for en el template -->
+  {% for item in list %}
+  <!-- Accediendo a macros -->
+  {% from 'macros/user.html' import span_list_decorator %}
+  <li>
+    {{span_list_decorator(item)}}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
