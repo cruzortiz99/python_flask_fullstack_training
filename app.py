@@ -1,11 +1,25 @@
 from flask import Flask, request, url_for, redirect, render_template
+from flask import Response as FlaskResponse
 from werkzeug.wrappers import Response
 from werkzeug.exceptions import NotFound
+from config import DevConfig
 from typing import Optional, Union, List, Tuple, Any
 
 
 # Crea el objeto Flask, se puede definir la carpeta para ubicar los templates
 app: Flask = Flask(__name__)
+app.config.from_object(DevConfig)
+
+
+@app.before_request
+def before_request():
+    print(f'Before: {request.url}')
+
+
+@app.after_request
+def after_request(response: FlaskResponse) -> FlaskResponse:
+    print(f'After: {request.url}')
+    return response
 
 
 @app.route('/')  # Usa la anotación para establecer la ruta
@@ -47,5 +61,5 @@ def page_not_found(error: NotFound) -> Tuple[str, int]:
 
 # Correr la app para iniciar el server
 if __name__ == '__main__':
-    app.run(host='localhost', port=8080, debug=True,)
+    app.run()
 # debug mantiene el servidor vivo para que recargue la app
